@@ -10,6 +10,12 @@ import UIKit
 
 class ViewController: UIViewController, JTAppleCalendarViewDataSource {
 
+    @IBOutlet weak var monthLabel: UILabel! {
+        didSet {
+            updateCalendarLabel(withDate: Date())
+        }
+    }
+
     let formatter = DateFormatter()
 
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
@@ -22,6 +28,11 @@ class ViewController: UIViewController, JTAppleCalendarViewDataSource {
 
         let params = ConfigurationParameters(startDate: Date(), endDate: endDate!)
         return params
+    }
+
+    fileprivate func updateCalendarLabel(withDate date: Date) {
+        formatter.dateFormat = "MMM"
+        monthLabel.text = formatter.string(from: date)
     }
 }
 
@@ -47,6 +58,13 @@ extension ViewController: JTAppleCalendarViewDelegate {
             return
         }
         cell.setup(forState: cellState)
+    }
+
+    func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo) {
+        guard let monthDate = visibleDates.monthDates.first else {
+            return
+        }
+        updateCalendarLabel(withDate: monthDate.date)
     }
 }
 
