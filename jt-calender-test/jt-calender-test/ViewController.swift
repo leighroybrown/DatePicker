@@ -44,8 +44,7 @@ extension ViewController: JTAppleCalendarViewDelegate {
     func calendar(_ calendar: JTAppleCalendarView, cellForItemAt date: Date, cellState: CellState, indexPath: IndexPath) -> JTAppleCell {
         let cell = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: "CalendarCell", for: indexPath) as! CalendarCell
 
-        cell.label.text = cellState.text
-        cell.setup(forState: cellState)
+        cell.setup(forState: cellState, date: date)
         return cell
     }
 
@@ -53,14 +52,14 @@ extension ViewController: JTAppleCalendarViewDelegate {
         guard let cell = cell as? CalendarCell else {
             return
         }
-        cell.setup(forState: cellState)
+        cell.setup(forState: cellState, date: date)
     }
 
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
         guard let cell = cell as? CalendarCell else {
             return
         }
-        cell.setup(forState: cellState)
+        cell.setup(forState: cellState, date: date)
     }
 
     func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo) {
@@ -71,6 +70,9 @@ extension ViewController: JTAppleCalendarViewDelegate {
     }
 
     func calendar(_ calendar: JTAppleCalendarView, shouldSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) -> Bool {
+        if Calendar.current.isDateInToday(date) {
+            return true
+        }
         return date > Date()
     }
 }

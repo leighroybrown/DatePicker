@@ -23,7 +23,21 @@ class CalendarCell: JTAppleCell {
     /// Selected view , hidden by default
     @IBOutlet weak var selectedView: UIView!
 
-    func setup(forState state: CellState) {
+    @IBOutlet weak var todaysView: UIView!
+
+    /// Setup the UI for a calendar cell
+    ///
+    /// - Parameters:
+    ///   - state: the CellState of the calendar cell
+    ///   - date: the date to display
+    func setup(forState state: CellState, date: Date) {
+        label.text            = state.text
+
+        if Calendar.current.isDateInToday(date) && !isSelected {
+            todaysView.isHidden = false
+        } else {
+            todaysView.isHidden = true
+        }
 
         selectedView.isHidden = !isSelected
 
