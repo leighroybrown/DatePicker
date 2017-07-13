@@ -15,8 +15,21 @@ class ViewController: UIViewController, JTAppleCalendarViewDataSource {
             updateCalendarLabel(withDate: Date())
         }
     }
+    @IBOutlet weak var fromButton: UIButton!
+    @IBOutlet weak var toButton: UIButton!
+    @IBOutlet weak var calendarView: JTAppleCalendarView!
+
+    fileprivate var fromDate: Date?
+    fileprivate var toDate: Date?
 
     let formatter = DateFormatter()
+    let buttonFormatter = DateFormatter()
+
+    override func awakeFromNib() {
+        buttonFormatter.locale = Calendar.current.locale
+        buttonFormatter.timeZone = Calendar.current.timeZone
+        buttonFormatter.dateFormat = "MM dd"
+    }
 
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
 
@@ -37,6 +50,18 @@ class ViewController: UIViewController, JTAppleCalendarViewDataSource {
         formatter.dateFormat = "MMM"
         monthLabel.text = formatter.string(from: date)
     }
+
+    @IBAction func fromButtonTapped(_ sender: Any) {
+        fromDate = nil
+        fromButton.setTitle("from", for: .normal)
+        calendarView.reloadData()
+    }
+
+    @IBAction func toButtonTapped(_ sender: Any) {
+        toDate = nil
+        toButton.setTitle("to", for: .normal)
+        calendarView.reloadData()
+    }
 }
 
 extension ViewController: JTAppleCalendarViewDelegate {
@@ -45,6 +70,13 @@ extension ViewController: JTAppleCalendarViewDelegate {
         let cell = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: "CalendarCell", for: indexPath) as! CalendarCell
 
         cell.setup(forState: cellState, date: date)
+
+        if let fromDate = fromDate {
+            cell.selectedView.isHidden = date != fromDate
+        } else if let toDate = toDate {
+            cell.selectedView.isHidden = date != toDate
+        }
+
         return cell
     }
 
@@ -53,10 +85,22 @@ extension ViewController: JTAppleCalendarViewDelegate {
             return
         }
         cell.setup(forState: cellState, date: date)
+
+        if fromDate == nil {
+            fromDate = date
+            fromButton.setTitle(buttonFormatter.string(from: date), for: .normal)
+        } else if toDate == nil {
+            toDate = date
+            toButton.setTitle(buttonFormatter.string(from: date), for: .normal)
+        }
     }
 
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
         guard let cell = cell as? CalendarCell else {
+            return
+        }
+
+        if fromDate != nil || toDate != nil {
             return
         }
         cell.setup(forState: cellState, date: date)
@@ -70,10 +114,11 @@ extension ViewController: JTAppleCalendarViewDelegate {
     }
 
     func calendar(_ calendar: JTAppleCalendarView, shouldSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) -> Bool {
-        if Calendar.current.isDateInToday(date) {
-            return true
+        if let _ = fromDate, let _ = toDate {
+            return false
         }
-        return date > Date()
+
+        return Calendar.current.isDateInToday(date) ? true : date > Date()
     }
 }
 
