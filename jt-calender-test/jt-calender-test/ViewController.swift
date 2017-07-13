@@ -31,15 +31,7 @@ extension ViewController: JTAppleCalendarViewDelegate {
         let cell = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: "CalendarCell", for: indexPath) as! CalendarCell
 
         cell.label.text = cellState.text
-
-        if cell.isSelected {
-            cell.selectedView.isHidden = false
-            cell.label.textColor = UIColor.black
-        } else {
-            cell.selectedView.isHidden = true
-            cell.label.textColor = UIColor.white
-        }
-
+        cell.setup(forState: cellState)
         return cell
     }
 
@@ -47,18 +39,14 @@ extension ViewController: JTAppleCalendarViewDelegate {
         guard let cell = cell as? CalendarCell else {
             return
         }
-
-        cell.selectedView.isHidden = false
-        cell.label.textColor       = UIColor.black
+        cell.setup(forState: cellState)
     }
 
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
         guard let cell = cell as? CalendarCell else {
             return
         }
-
-        cell.selectedView.isHidden = true
-        cell.label.textColor       = UIColor.white
+        cell.setup(forState: cellState)
     }
 }
 
