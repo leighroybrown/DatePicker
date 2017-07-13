@@ -25,33 +25,56 @@ class CalendarCell: JTAppleCell {
 
     @IBOutlet weak var todaysView: UIView!
 
-    /// Setup the UI for a calendar cell
+
+    /// Setup the UI for the calendar cell
     ///
     /// - Parameters:
-    ///   - state: the CellState of the calendar cell
-    ///   - date: the date to display
-    func setup(forState state: CellState, date: Date) {
-        label.text            = state.text
+    ///   - state: the CellState used to get the text
+    ///   - fromDate: the optional fromDate to set to selected
+    ///   - toDate: the optional toDate to set to selected
+    ///   - cellDate: the date of the cell to update
+    func setup(forState state: CellState, fromDate: Date?, toDate: Date?, cellDate: Date) {
+        label.text = state.text
 
-        if Calendar.current.isDateInToday(date) && !isSelected {
+        // Show/Hide the today indicator
+        if Calendar.current.isDateInToday(cellDate) && !isSelected {
             todaysView.isHidden = false
         } else {
             todaysView.isHidden = true
         }
 
-        selectedView.isHidden = !isSelected
+        // Handle selected
+        setupSelectedState(forCellDate: cellDate, fromDate: fromDate, toDate: toDate)
 
-        switch (isSelected, state.dateBelongsTo) {
-        case (true, _):
+        // Handle text colour
+        switch (selectedView.isHidden, state.dateBelongsTo) {
+        case (false, _):
             label.textColor = CellColours.Selected
-        case (false, .thisMonth) where Calendar.current.isDateInToday(date):
+        case (true, .thisMonth) where Calendar.current.isDateInToday(cellDate):
             label.textColor = CellColours.Default
-        case (false, .thisMonth) where date < Date():
+        case (true, .thisMonth) where cellDate < Date():
             label.textColor = CellColours.OutOfMonth
-        case (false, .thisMonth):
+        case (true, .thisMonth):
             label.textColor = CellColours.Default
         default:
             label.textColor = CellColours.OutOfMonth
+        }
+    }
+
+    /// Sets the correct selected status based on the dates
+    ///
+    /// - Parameters:
+    ///   - cellDate: the date of the cell to update
+    ///   - fromDate: the fromDate selected
+    ///   - toDate: the toDate selected
+    fileprivate func setupSelectedState(forCellDate cellDate: Date, fromDate: Date?, toDate: Date?) {
+        selectedView.isHidden = true
+
+        if let fromDate = fromDate, cellDate == fromDate {
+            selectedView.isHidden = false
+        }
+        if let toDate = toDate, cellDate == toDate {
+            selectedView.isHidden = false
         }
     }
 }

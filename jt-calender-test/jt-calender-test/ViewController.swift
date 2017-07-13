@@ -53,13 +53,13 @@ class ViewController: UIViewController, JTAppleCalendarViewDataSource {
 
     @IBAction func fromButtonTapped(_ sender: Any) {
         fromDate = nil
-        fromButton.setTitle("from", for: .normal)
+        fromButton.setTitle("From", for: .normal)
         calendarView.reloadData()
     }
 
     @IBAction func toButtonTapped(_ sender: Any) {
         toDate = nil
-        toButton.setTitle("to", for: .normal)
+        toButton.setTitle("To", for: .normal)
         calendarView.reloadData()
     }
 }
@@ -69,14 +69,7 @@ extension ViewController: JTAppleCalendarViewDelegate {
     func calendar(_ calendar: JTAppleCalendarView, cellForItemAt date: Date, cellState: CellState, indexPath: IndexPath) -> JTAppleCell {
         let cell = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: "CalendarCell", for: indexPath) as! CalendarCell
 
-        cell.setup(forState: cellState, date: date)
-
-        if let fromDate = fromDate {
-            cell.selectedView.isHidden = date != fromDate
-        } else if let toDate = toDate {
-            cell.selectedView.isHidden = date != toDate
-        }
-
+        cell.setup(forState: cellState, fromDate: fromDate, toDate: toDate, cellDate: date)
         return cell
     }
 
@@ -84,7 +77,6 @@ extension ViewController: JTAppleCalendarViewDelegate {
         guard let cell = cell as? CalendarCell else {
             return
         }
-        cell.setup(forState: cellState, date: date)
 
         if fromDate == nil {
             fromDate = date
@@ -93,6 +85,8 @@ extension ViewController: JTAppleCalendarViewDelegate {
             toDate = date
             toButton.setTitle(buttonFormatter.string(from: date), for: .normal)
         }
+
+        cell.setup(forState: cellState, fromDate: fromDate, toDate: toDate, cellDate: date)
     }
 
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
@@ -103,7 +97,7 @@ extension ViewController: JTAppleCalendarViewDelegate {
         if fromDate != nil || toDate != nil {
             return
         }
-        cell.setup(forState: cellState, date: date)
+        cell.setup(forState: cellState, fromDate: fromDate, toDate: toDate, cellDate: date)
     }
 
     func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo) {
