@@ -30,6 +30,9 @@ class ViewController: UIViewController, JTAppleCalendarViewDataSource {
         return params
     }
 
+    /// Updates the calendar label with the correct month
+    ///
+    /// - Parameter date: the date to get the month from
     fileprivate func updateCalendarLabel(withDate date: Date) {
         formatter.dateFormat = "MMM"
         monthLabel.text = formatter.string(from: date)
@@ -65,6 +68,10 @@ extension ViewController: JTAppleCalendarViewDelegate {
             return
         }
         updateCalendarLabel(withDate: monthDate.date)
+    }
+
+    func calendar(_ calendar: JTAppleCalendarView, shouldSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) -> Bool {
+        return date > Date()
     }
 }
 
