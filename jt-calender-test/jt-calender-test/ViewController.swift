@@ -31,6 +31,15 @@ extension ViewController: JTAppleCalendarViewDelegate {
         let cell = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: "CalendarCell", for: indexPath) as! CalendarCell
 
         cell.label.text = cellState.text
+
+        if cell.isSelected {
+            cell.selectedView.isHidden = false
+            cell.label.textColor = UIColor.black
+        } else {
+            cell.selectedView.isHidden = true
+            cell.label.textColor = UIColor.white
+        }
+
         return cell
     }
 
