@@ -108,10 +108,20 @@ extension ViewController: JTAppleCalendarViewDelegate {
     }
 
     func calendar(_ calendar: JTAppleCalendarView, shouldSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) -> Bool {
+        // If both dates are set, dont allow more selection
         if let _ = fromDate, let _ = toDate {
             return false
         }
 
+        // Dont allow toDate to be before the selected fromDate and vice versa
+        if let fromDate = fromDate, date < fromDate {
+            return false
+        }
+        if let toDate = toDate, date > toDate {
+            return false
+        }
+
+        // Else make sure the dates are in the future
         return Calendar.current.isDateInToday(date) ? true : date > Date()
     }
 }
