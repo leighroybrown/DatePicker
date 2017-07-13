@@ -44,6 +44,10 @@ class CalendarCell: JTAppleCell {
         switch (isSelected, state.dateBelongsTo) {
         case (true, _):
             label.textColor = CellColours.Selected
+        case (false, .thisMonth) where Calendar.current.isDateInToday(date):
+            label.textColor = CellColours.Default
+        case (false, .thisMonth) where date < Date():
+            label.textColor = CellColours.OutOfMonth
         case (false, .thisMonth):
             label.textColor = CellColours.Default
         default:
