@@ -83,6 +83,9 @@ class CalendarCell: JTAppleCell {
         }
     }
 
+    /// Animates fading in the inRangeView
+    ///
+    /// - Parameter delay: the delay before starting the animation
     func animateInRangeView(withDelay delay: TimeInterval) {
         inRangeView.alpha = 0
         inRangeView.isHidden = false

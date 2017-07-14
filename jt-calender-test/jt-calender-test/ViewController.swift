@@ -105,11 +105,7 @@ extension ViewController: JTAppleCalendarViewDelegate {
             toButton.setTitle(buttonFormatter.string(from: date), for: .normal)
         }
 
-        // If they're both set, we should reload the data to trigger animation
-        if let _ = fromDate, let _ = toDate {
-            animateCellsInBetween()
-        }
-
+        animateCellsInBetween()
         cell.setup(forState: cellState, fromDate: fromDate, toDate: toDate, cellDate: date)
     }
 
@@ -118,6 +114,7 @@ extension ViewController: JTAppleCalendarViewDelegate {
             return
         }
 
+        /// If they're both set, theres no need to deselect a cell
         if fromDate != nil || toDate != nil {
             return
         }
