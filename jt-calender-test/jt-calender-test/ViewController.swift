@@ -18,10 +18,10 @@ class ViewController: UIViewController {
     }
 
     /// Button to select the from date
-    @IBOutlet weak var fromButton: UIButton!
+    @IBOutlet weak var fromButton: DatePickerButton!
 
     /// Button to select to to date
-    @IBOutlet weak var toButton: UIButton!
+    @IBOutlet weak var toButton: DatePickerButton!
 
     @IBOutlet weak var calendarView: JTAppleCalendarView! {
         didSet {
@@ -47,13 +47,6 @@ class ViewController: UIViewController {
         return formatter
     }()
 
-    fileprivate lazy var buttonFormatter: DateFormatter = {
-        let formatter        = DateFormatter()
-        formatter.dateFormat = "MM dd"
-        formatter.locale     = Calendar.current.locale
-        return formatter
-    }()
-
     /// Updates the calendar label with the correct month
     ///
     /// - Parameter date: the date to get the month from
@@ -63,13 +56,13 @@ class ViewController: UIViewController {
 
     @IBAction func fromButtonTapped(_ sender: Any) {
         fromDate = nil
-        fromButton.setTitle("From", for: .normal)
+        fromButton.updateTitle(forDate: fromDate)
         calendarView.reloadData()
     }
 
     @IBAction func toButtonTapped(_ sender: Any) {
         toDate = nil
-        toButton.setTitle("To", for: .normal)
+        toButton.updateTitle(forDate: toDate)
         calendarView.reloadData()
     }
 }
@@ -99,10 +92,10 @@ extension ViewController: JTAppleCalendarViewDelegate {
 
         if fromDate == nil {
             fromDate = date
-            fromButton.setTitle(buttonFormatter.string(from: date), for: .normal)
+            fromButton.updateTitle(forDate: date)
         } else if toDate == nil {
             toDate = date
-            toButton.setTitle(buttonFormatter.string(from: date), for: .normal)
+            toButton.updateTitle(forDate: date)
         }
 
         animateCellsInBetween()

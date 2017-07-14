@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B9037CF71F191685007F5B13 /* DatePickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9037CF61F191685007F5B13 /* DatePickerButton.swift */; };
 		B9C9B4801F176E760045D71C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C9B47F1F176E760045D71C /* AppDelegate.swift */; };
 		B9C9B4821F176E760045D71C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C9B4811F176E760045D71C /* ViewController.swift */; };
 		B9C9B4851F176E760045D71C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9C9B4831F176E760045D71C /* Main.storyboard */; };
@@ -32,6 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B9037CF61F191685007F5B13 /* DatePickerButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerButton.swift; sourceTree = "<group>"; };
 		B9C9B47C1F176E760045D71C /* jt-calender-test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "jt-calender-test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9C9B47F1F176E760045D71C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B9C9B4811F176E760045D71C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 				B9C9B4881F176E760045D71C /* LaunchScreen.storyboard */,
 				B9C9B48B1F176E760045D71C /* Info.plist */,
 				B9C9B4911F176EDE0045D71C /* Sources */,
+				B9037CF61F191685007F5B13 /* DatePickerButton.swift */,
 			);
 			path = "jt-calender-test";
 			sourceTree = "<group>";
@@ -207,6 +210,7 @@
 				B9C9B4AB1F176EDE0045D71C /* JTAppleCalendarVariables.swift in Sources */,
 				B9C9B4AA1F176EDE0045D71C /* JTAppleCalendarLayoutProtocol.swift in Sources */,
 				B9C9B4AF1F176EDE0045D71C /* JTCalendarProtocols.swift in Sources */,
+				B9037CF71F191685007F5B13 /* DatePickerButton.swift in Sources */,
 				B9C9B4A91F176EDE0045D71C /* JTAppleCalendarLayout.swift in Sources */,
 				B9C9B4821F176E760045D71C /* ViewController.swift in Sources */,
 				B9C9B4AD1F176EDE0045D71C /* JTAppleCell.swift in Sources */,
@@ -380,6 +384,7 @@
 				B9C9B4901F176E760045D71C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
