@@ -17,7 +17,12 @@ class ViewController: UIViewController, JTAppleCalendarViewDataSource {
     }
     @IBOutlet weak var fromButton: UIButton!
     @IBOutlet weak var toButton: UIButton!
-    @IBOutlet weak var calendarView: JTAppleCalendarView!
+    @IBOutlet weak var calendarView: JTAppleCalendarView! {
+        didSet {
+            calendarView.minimumLineSpacing = 0
+            calendarView.minimumInteritemSpacing = 0
+        }
+    }
 
     fileprivate var fromDate: Date?
     fileprivate var toDate: Date?
@@ -86,6 +91,11 @@ extension ViewController: JTAppleCalendarViewDelegate {
             toButton.setTitle(buttonFormatter.string(from: date), for: .normal)
         }
 
+        // If they're both set, we should reload the data to trigger animation
+        if let _ = fromDate, let _ = toDate {
+            animateCellsInBetween()
+        }
+
         cell.setup(forState: cellState, fromDate: fromDate, toDate: toDate, cellDate: date)
     }
 
@@ -97,6 +107,7 @@ extension ViewController: JTAppleCalendarViewDelegate {
         if fromDate != nil || toDate != nil {
             return
         }
+
         cell.setup(forState: cellState, fromDate: fromDate, toDate: toDate, cellDate: date)
     }
 
@@ -123,6 +134,31 @@ extension ViewController: JTAppleCalendarViewDelegate {
 
         // Else make sure the dates are in the future
         return Calendar.current.isDateInToday(date) ? true : date > Date()
+    }
+
+    func animateCellsInBetween() {
+        guard let fromDate = fromDate, let toDate = toDate else {
+            return
+        }
+
+        let dates: [Date] = [fromDate, toDate]
+        let indexPaths = calendarView.pathsFromDates(dates)
+
+        let startNumber = indexPaths[0].row + 1
+        let endNumber = indexPaths[1].row - 1
+        let section = indexPaths[0].section
+        let delay: TimeInterval = 0.03
+        var count: Double = 1
+
+        for x in startNumber...endNumber {
+            let path = IndexPath(row: x, section: section)
+
+            if let cell = calendarView.cellForItem(at: path) as? CalendarCell {
+                cell.animateInRangeView(withDelay: delay * count)
+            }
+
+            count += 1
+        }
     }
 }
 

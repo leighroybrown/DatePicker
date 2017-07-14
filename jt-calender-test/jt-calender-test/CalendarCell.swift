@@ -23,8 +23,11 @@ class CalendarCell: JTAppleCell {
     /// Selected view , hidden by default
     @IBOutlet weak var selectedView: UIView!
 
+    /// The view to display when the cell is todays date
     @IBOutlet weak var todaysView: UIView!
 
+    /// The view to display in between to and from selected dates
+    @IBOutlet weak var inRangeView: UIView!
 
     /// Setup the UI for the calendar cell
     ///
@@ -35,6 +38,7 @@ class CalendarCell: JTAppleCell {
     ///   - cellDate: the date of the cell to update
     func setup(forState state: CellState, fromDate: Date?, toDate: Date?, cellDate: Date) {
         label.text = state.text
+        inRangeView.isHidden = true
 
         // Show/Hide the today indicator
         if Calendar.current.isDateInToday(cellDate) && !isSelected {
@@ -76,5 +80,14 @@ class CalendarCell: JTAppleCell {
         if let toDate = toDate, cellDate == toDate {
             selectedView.isHidden = false
         }
+    }
+
+    func animateInRangeView(withDelay delay: TimeInterval) {
+        inRangeView.alpha = 0
+        inRangeView.isHidden = false
+
+        UIView.animate(withDuration: 1.0, delay: delay, animations: {
+            self.inRangeView.alpha = 1
+        })
     }
 }
