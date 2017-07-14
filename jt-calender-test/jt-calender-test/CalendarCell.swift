@@ -39,6 +39,7 @@ class CalendarCell: JTAppleCell {
     func setup(forState state: CellState, fromDate: Date?, toDate: Date?, cellDate: Date) {
         label.text = state.text
         inRangeView.isHidden = true
+        
 
         // Show/Hide the today indicator
         if Calendar.current.isDateInToday(cellDate) && !isSelected {

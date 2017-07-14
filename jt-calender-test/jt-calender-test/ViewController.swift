@@ -141,6 +141,11 @@ extension ViewController: JTAppleCalendarViewDelegate {
             return
         }
 
+        // Dont do animation if they're not in the same month
+        if !Calendar.current.isDate(fromDate, equalTo: toDate, toGranularity: .month) {
+            return
+        }
+
         let dates: [Date] = [fromDate, toDate]
         let indexPaths = calendarView.pathsFromDates(dates)
 
