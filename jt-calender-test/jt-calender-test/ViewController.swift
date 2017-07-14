@@ -8,15 +8,21 @@
 
 import UIKit
 
-class ViewController: UIViewController, JTAppleCalendarViewDataSource {
+class ViewController: UIViewController {
 
+    /// Label at the top of the view showing the current viewable month
     @IBOutlet weak var monthLabel: UILabel! {
         didSet {
             updateCalendarLabel(withDate: Date())
         }
     }
+
+    /// Button to select the from date
     @IBOutlet weak var fromButton: UIButton!
+
+    /// Button to select to to date
     @IBOutlet weak var toButton: UIButton!
+
     @IBOutlet weak var calendarView: JTAppleCalendarView! {
         didSet {
             calendarView.minimumLineSpacing = 0
@@ -24,36 +30,35 @@ class ViewController: UIViewController, JTAppleCalendarViewDataSource {
         }
     }
 
+    /// The maximum date the calendar view can scroll to
+    fileprivate let calenderEndDate: Date = Calendar.current.date(byAdding: .year, value: 2, to: Date())!
+
+    /// The selected fromDate
     fileprivate var fromDate: Date?
+
+    /// The selected toDate
     fileprivate var toDate: Date?
 
-    let formatter = DateFormatter()
-    let buttonFormatter = DateFormatter()
+    /// DateFormatter for the month label
+    fileprivate lazy var monthLabelFormatter: DateFormatter = {
+        let formatter        = DateFormatter()
+        formatter.dateFormat = "MMM"
+        formatter.locale     = Calendar.current.locale
+        return formatter
+    }()
 
-    override func awakeFromNib() {
-        buttonFormatter.locale = Calendar.current.locale
-        buttonFormatter.timeZone = Calendar.current.timeZone
-        buttonFormatter.dateFormat = "MM dd"
-    }
-
-    func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
-
-        formatter.dateFormat = "yyyy MM dd"
-        formatter.timeZone = Calendar.current.timeZone
-        formatter.locale  = Calendar.current.locale
-
-        let endDate = formatter.date(from: "2018 01 01")
-
-        let params = ConfigurationParameters(startDate: Date(), endDate: endDate!)
-        return params
-    }
+    fileprivate lazy var buttonFormatter: DateFormatter = {
+        let formatter        = DateFormatter()
+        formatter.dateFormat = "MM dd"
+        formatter.locale     = Calendar.current.locale
+        return formatter
+    }()
 
     /// Updates the calendar label with the correct month
     ///
     /// - Parameter date: the date to get the month from
     fileprivate func updateCalendarLabel(withDate date: Date) {
-        formatter.dateFormat = "MMM"
-        monthLabel.text = formatter.string(from: date)
+        monthLabel.text = monthLabelFormatter.string(from: date)
     }
 
     @IBAction func fromButtonTapped(_ sender: Any) {
@@ -69,6 +74,15 @@ class ViewController: UIViewController, JTAppleCalendarViewDataSource {
     }
 }
 
+// MARK: - JTAppleCalendarViewDataSource
+extension ViewController: JTAppleCalendarViewDataSource {
+
+    func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
+        return ConfigurationParameters(startDate: Date(), endDate: calenderEndDate)
+    }
+}
+
+// MARK: - JTAppleCalendarViewDelegate
 extension ViewController: JTAppleCalendarViewDelegate {
 
     func calendar(_ calendar: JTAppleCalendarView, cellForItemAt date: Date, cellState: CellState, indexPath: IndexPath) -> JTAppleCell {
