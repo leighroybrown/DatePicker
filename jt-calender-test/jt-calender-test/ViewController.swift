@@ -136,6 +136,7 @@ extension ViewController: JTAppleCalendarViewDelegate {
         return Calendar.current.isDateInToday(date) ? true : date > Date()
     }
 
+    /// Animates the cells inbetween the 2 selected dates if applicable
     func animateCellsInBetween() {
         guard let fromDate = fromDate, let toDate = toDate else {
             return
@@ -151,6 +152,12 @@ extension ViewController: JTAppleCalendarViewDelegate {
 
         let startNumber = indexPaths[0].row + 1
         let endNumber = indexPaths[1].row - 1
+
+        /// Dont continue if they're right next to each other
+        if startNumber >= endNumber {
+            return
+        }
+
         let section = indexPaths[0].section
         let delay: TimeInterval = 0.03
         var count: Double = 1
