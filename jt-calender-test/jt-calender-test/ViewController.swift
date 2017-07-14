@@ -165,7 +165,7 @@ extension ViewController: JTAppleCalendarViewDelegate {
         let endNumber = indexPaths[1].row - 1
 
         /// Dont continue if they're right next to each other
-        if startNumber >= endNumber {
+        if startNumber > endNumber {
             return
         }
 
