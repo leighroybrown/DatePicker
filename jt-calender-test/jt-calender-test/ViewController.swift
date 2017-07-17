@@ -56,13 +56,13 @@ class ViewController: UIViewController {
 
     @IBAction func fromButtonTapped(_ sender: Any) {
         fromDate = nil
-        fromButton.updateTitle(forDate: fromDate)
+        fromButton.updateTitle(forDate: nil)
         calendarView.reloadData()
     }
 
     @IBAction func toButtonTapped(_ sender: Any) {
         toDate = nil
-        toButton.updateTitle(forDate: toDate)
+        toButton.updateTitle(forDate: nil)
         calendarView.reloadData()
     }
 }
