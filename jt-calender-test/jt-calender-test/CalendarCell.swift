@@ -50,8 +50,7 @@ class CalendarCell: JTAppleCell {
     ///   - toDate: the optional toDate to set to selected
     ///   - cellDate: the date of the cell to update
     func setup(forState state: CellState, fromDate: Date?, toDate: Date?, cellDate: Date) {
-        label.text           = state.text
-        updateMonthLabel(forDate: cellDate, forCellState: state)
+        updateLabels(forDate: cellDate, forCellState: state)
         inRangeView.isHidden = true
 
         // Show/Hide the today indicator
@@ -111,12 +110,23 @@ class CalendarCell: JTAppleCell {
         })
     }
 
-    fileprivate func updateMonthLabel(forDate date: Date, forCellState state: CellState) {
+    fileprivate func updateLabels(forDate date: Date, forCellState state: CellState) {
+        label.text          = state.text
         monthLabel.isHidden = true
 
         if let day = Calendar.current.ordinality(of: .day, in: .month, for: date), day == 1 {
-            monthLabel.text = monthLabelFormatter.string(from: date)
-            monthLabel.isHidden = state.dateBelongsTo != .thisMonth
+            let text = monthLabelFormatter.string(from: date).capitalized
+            monthLabel.text = text
+
+            switch state.dateBelongsTo {
+            case .thisMonth:
+                monthLabel.isHidden = false
+            case .followingMonthWithinBoundary:
+                label.text = text
+            default:
+                return
+            }
+
         }
     }
 }
