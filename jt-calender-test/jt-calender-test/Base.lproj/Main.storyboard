@@ -48,16 +48,28 @@
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9ef-ES-XYu" userLabel="Border">
+                                                    <rect key="frame" x="0.0" y="18.5" width="1" height="13"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="13" id="DNJ-TH-sJh"/>
+                                                        <constraint firstAttribute="width" constant="1" id="XKY-1I-teu">
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="boolean" keyPath="usePixels" value="YES"/>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </constraint>
+                                                    </constraints>
+                                                </view>
                                                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2xX-bS-ng2" userLabel="Selected View">
-                                                    <rect key="frame" x="0.0" y="0.0" width="49" height="49"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                     <color key="backgroundColor" red="1" green="0.92941176469999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 </view>
                                                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XHy-KD-L4i" userLabel="Todays View">
-                                                    <rect key="frame" x="5" y="5" width="39" height="39"/>
+                                                    <rect key="frame" x="5" y="5" width="40" height="40"/>
                                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
                                                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fsc-84-P57" userLabel="In Range View">
-                                                    <rect key="frame" x="0.0" y="5" width="50" height="39"/>
+                                                    <rect key="frame" x="0.0" y="5" width="51" height="40"/>
                                                     <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="31" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1k8-bn-N56">
@@ -71,6 +83,7 @@
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="XHy-KD-L4i" secondAttribute="bottom" constant="5" id="1A4-uZ-yJb"/>
                                             <constraint firstItem="2xX-bS-ng2" firstAttribute="leading" secondItem="FWK-6s-pAe" secondAttribute="leading" id="3iI-e6-V4O"/>
+                                            <constraint firstItem="9ef-ES-XYu" firstAttribute="centerY" secondItem="FWK-6s-pAe" secondAttribute="centerY" id="4SG-yF-vGn"/>
                                             <constraint firstAttribute="trailing" secondItem="XHy-KD-L4i" secondAttribute="trailing" constant="5" id="BT9-8x-scP"/>
                                             <constraint firstItem="2xX-bS-ng2" firstAttribute="top" secondItem="FWK-6s-pAe" secondAttribute="top" id="EjY-ci-d3B"/>
                                             <constraint firstAttribute="trailing" secondItem="fsc-84-P57" secondAttribute="trailing" constant="-1" id="NxH-nT-8d4"/>
@@ -80,11 +93,13 @@
                                             <constraint firstItem="fsc-84-P57" firstAttribute="leading" secondItem="FWK-6s-pAe" secondAttribute="leading" id="bnb-2I-An0"/>
                                             <constraint firstAttribute="trailing" secondItem="2xX-bS-ng2" secondAttribute="trailing" id="jph-HY-A2M"/>
                                             <constraint firstItem="XHy-KD-L4i" firstAttribute="top" secondItem="FWK-6s-pAe" secondAttribute="top" constant="5" id="lLn-wB-SeC"/>
+                                            <constraint firstItem="9ef-ES-XYu" firstAttribute="leading" secondItem="FWK-6s-pAe" secondAttribute="leading" id="mdh-Yt-NbG"/>
                                             <constraint firstItem="1k8-bn-N56" firstAttribute="centerX" secondItem="FWK-6s-pAe" secondAttribute="centerX" id="nXP-U6-ULn"/>
                                             <constraint firstAttribute="bottom" secondItem="fsc-84-P57" secondAttribute="bottom" constant="5" id="pgl-OX-Snm"/>
                                             <constraint firstItem="fsc-84-P57" firstAttribute="top" secondItem="FWK-6s-pAe" secondAttribute="top" constant="5" id="umf-8J-sQi"/>
                                         </constraints>
                                         <connections>
+                                            <outlet property="borderView" destination="9ef-ES-XYu" id="37Z-Gm-QIY"/>
                                             <outlet property="inRangeView" destination="fsc-84-P57" id="rDI-8T-eJZ"/>
                                             <outlet property="label" destination="1k8-bn-N56" id="y17-qo-5e2"/>
                                             <outlet property="selectedView" destination="2xX-bS-ng2" id="Yh7-1A-rA3"/>

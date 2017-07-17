@@ -29,6 +29,9 @@ class CalendarCell: JTAppleCell {
     /// The view to display in between to and from selected dates
     @IBOutlet weak var inRangeView: UIView!
 
+    /// The border view on the left edge of the cell
+    @IBOutlet weak var borderView: UIView!
+
     /// Setup the UI for the calendar cell
     ///
     /// - Parameters:
@@ -37,9 +40,8 @@ class CalendarCell: JTAppleCell {
     ///   - toDate: the optional toDate to set to selected
     ///   - cellDate: the date of the cell to update
     func setup(forState state: CellState, fromDate: Date?, toDate: Date?, cellDate: Date) {
-        label.text = state.text
+        label.text           = state.text
         inRangeView.isHidden = true
-        
 
         // Show/Hide the today indicator
         if Calendar.current.isDateInToday(cellDate) && !isSelected {
@@ -47,6 +49,9 @@ class CalendarCell: JTAppleCell {
         } else {
             todaysView.isHidden = true
         }
+
+        // Show/Hide the left border depending on day of week
+        borderView.isHidden = state.day == .monday
 
         // Handle selected
         setupSelectedState(forCellDate: cellDate, fromDate: fromDate, toDate: toDate)
