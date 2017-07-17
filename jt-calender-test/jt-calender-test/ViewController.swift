@@ -98,7 +98,7 @@ extension ViewController: JTAppleCalendarViewDelegate {
             toButton.updateTitle(forDate: date)
         }
 
-        animateCellsInBetween()
+        calendar.animateCells(fromDate: fromDate, toDate: toDate)
         cell.setup(forState: cellState, fromDate: fromDate, toDate: toDate, cellDate: date)
     }
 
@@ -132,43 +132,6 @@ extension ViewController: JTAppleCalendarViewDelegate {
             return false
         default:
             return Calendar.current.isDateInToday(date) ? true : date > Date()
-        }
-    }
-
-    /// Animates the cells inbetween the 2 selected dates if applicable
-    func animateCellsInBetween() {
-        guard let fromDate = fromDate, let toDate = toDate else {
-            return
-        }
-
-        // Dont do animation if they're not in the same month
-        if !Calendar.current.isDate(fromDate, equalTo: toDate, toGranularity: .month) {
-            return
-        }
-
-        let dates: [Date] = [fromDate, toDate]
-        let indexPaths = calendarView.pathsFromDates(dates)
-
-        let startNumber = indexPaths[0].row + 1
-        let endNumber = indexPaths[1].row - 1
-
-        /// Dont continue if they're right next to each other
-        if startNumber > endNumber {
-            return
-        }
-
-        let section = indexPaths[0].section
-        let delay: TimeInterval = 0.03
-        var count: Double = 1
-
-        for x in startNumber...endNumber {
-            let path = IndexPath(row: x, section: section)
-
-            if let cell = calendarView.cellForItem(at: path) as? CalendarCell {
-                cell.animateInRangeView(withDelay: delay * count)
-            }
-
-            count += 1
         }
     }
 }
