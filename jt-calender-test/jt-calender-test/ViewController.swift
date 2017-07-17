@@ -123,21 +123,16 @@ extension ViewController: JTAppleCalendarViewDelegate {
     }
 
     func calendar(_ calendar: JTAppleCalendarView, shouldSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) -> Bool {
-        // If both dates are set, dont allow more selection
-        if let _ = fromDate, let _ = toDate {
+        switch (fromDate, toDate) {
+        case (.some, .some):
             return false
-        }
-
-        // Dont allow toDate to be before the selected fromDate and vice versa
-        if let fromDate = fromDate, date < fromDate {
+        case (.some(let fromDate), nil) where date < fromDate:
             return false
-        }
-        if let toDate = toDate, date > toDate {
+        case (nil, .some(let toDate)) where date > toDate:
             return false
+        default:
+            return Calendar.current.isDateInToday(date) ? true : date > Date()
         }
-
-        // Else make sure the dates are in the future
-        return Calendar.current.isDateInToday(date) ? true : date > Date()
     }
 
     /// Animates the cells inbetween the 2 selected dates if applicable
