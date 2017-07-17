@@ -125,7 +125,10 @@ extension ViewController: JTAppleCalendarViewDelegate {
     func calendar(_ calendar: JTAppleCalendarView, shouldSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) -> Bool {
         switch (fromDate, toDate) {
         case (.some, .some):
-            return false
+            fromDate = nil
+            toDate   = nil
+            calendar.reloadData()
+            return true
         case (.some(let fromDate), nil) where date < fromDate:
             return false
         case (nil, .some(let toDate)) where date > toDate:
