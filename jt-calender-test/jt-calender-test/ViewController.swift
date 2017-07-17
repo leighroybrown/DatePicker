@@ -134,7 +134,7 @@ extension ViewController: JTAppleCalendarViewDelegate {
             fromDate = nil
             toDate   = nil
             calendar.reloadData()
-            return true
+            return Calendar.current.isDateInToday(date) ? true : date > Date()
         case (.some(let fromDate), nil) where date < fromDate:
             return false
         case (nil, .some(let toDate)) where date > toDate:
