@@ -77,7 +77,7 @@ class ViewController: UIViewController {
 extension ViewController: JTAppleCalendarViewDataSource {
 
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
-        return ConfigurationParameters(startDate: Date(), endDate: calenderEndDate)
+        return ConfigurationParameters(startDate: Date(), endDate: calenderEndDate, firstDayOfWeek: .monday)
     }
 }
 
