@@ -34,15 +34,23 @@ class ViewController: UIViewController {
     fileprivate let calenderEndDate: Date = Calendar.current.date(byAdding: .year, value: 2, to: Date())!
 
     /// The selected fromDate
-    fileprivate var fromDate: Date?
+    fileprivate var fromDate: Date? {
+        didSet {
+            fromButton.updateTitle(forDate: fromDate)
+        }
+    }
 
     /// The selected toDate
-    fileprivate var toDate: Date?
+    fileprivate var toDate: Date? {
+        didSet {
+            toButton.updateTitle(forDate: toDate)
+        }
+    }
 
     /// DateFormatter for the month label
     fileprivate lazy var monthLabelFormatter: DateFormatter = {
         let formatter        = DateFormatter()
-        formatter.dateFormat = "MMM"
+        formatter.dateFormat = "MMM YY"
         formatter.locale     = Calendar.current.locale
         return formatter
     }()
@@ -56,13 +64,11 @@ class ViewController: UIViewController {
 
     @IBAction func fromButtonTapped(_ sender: Any) {
         fromDate = nil
-        fromButton.updateTitle(forDate: nil)
         calendarView.reloadData()
     }
 
     @IBAction func toButtonTapped(_ sender: Any) {
         toDate = nil
-        toButton.updateTitle(forDate: nil)
         calendarView.reloadData()
     }
 }
