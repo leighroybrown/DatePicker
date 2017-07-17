@@ -143,5 +143,30 @@ extension ViewController: JTAppleCalendarViewDelegate {
             return Calendar.current.isDateInToday(date) ? true : date > Date()
         }
     }
+
+    func calendar(_ calendar: JTAppleCalendarView, headerViewForDateRange range: (start: Date, end: Date), at indexPath: IndexPath) -> JTAppleCollectionReusableView {
+        guard let view = calendar.dequeueReusableJTAppleSupplementaryView(withReuseIdentifier: "CalendarHeaderView", for: indexPath) as? CalendarHeaderView else {
+            return JTAppleCollectionReusableView()
+        }
+//
+//        /// Create an array of dates from the range and find the first...first of the month 😱
+//        let dates = calendar.generateDateRange(from: range.start, to: range.end)
+//        for date in dates {
+//            if let day = Calendar.current.ordinality(of: .day, in: .month, for: date), day == 1 {
+//                view.monthLabel.text = monthLabelFormatter.string(from: date)
+//                if let cell = calendar.cellStatus(for: date)?.cell() as? CalendarCell {
+//                    view.xConstraint.constant = cell.frame.midX
+//                } else {
+//                    print("thats a whole lotta nope")
+//                }
+//                break
+//            }
+//        }
+        return view
+    }
+
+    func sizeOfDecorationView(indexPath: IndexPath) -> CGRect {
+        return CGRect(x: 0, y: 0, width: 50, height: 50)
+    }
 }
 

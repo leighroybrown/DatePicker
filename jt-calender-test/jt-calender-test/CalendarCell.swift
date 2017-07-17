@@ -20,6 +20,9 @@ class CalendarCell: JTAppleCell {
     /// Main label of the cell displaying number
     @IBOutlet weak var label: UILabel!
 
+    /// Label to show month above if 1st of the month
+    @IBOutlet weak var monthLabel: UILabel!
+
     /// Selected view , hidden by default
     @IBOutlet weak var selectedView: UIView!
 
@@ -32,6 +35,13 @@ class CalendarCell: JTAppleCell {
     /// The border view on the left edge of the cell
     @IBOutlet weak var borderView: UIView!
 
+    fileprivate lazy var monthLabelFormatter: DateFormatter = {
+        let formatter        = DateFormatter()
+        formatter.dateFormat = "MMM"
+        formatter.locale     = Calendar.current.locale
+        return formatter
+    }()
+
     /// Setup the UI for the calendar cell
     ///
     /// - Parameters:
@@ -41,6 +51,7 @@ class CalendarCell: JTAppleCell {
     ///   - cellDate: the date of the cell to update
     func setup(forState state: CellState, fromDate: Date?, toDate: Date?, cellDate: Date) {
         label.text           = state.text
+        updateMonthLabel(forDate: cellDate, forCellState: state)
         inRangeView.isHidden = true
 
         // Show/Hide the today indicator
@@ -98,5 +109,14 @@ class CalendarCell: JTAppleCell {
         UIView.animate(withDuration: 1.0, delay: delay, animations: {
             self.inRangeView.alpha = 1
         })
+    }
+
+    fileprivate func updateMonthLabel(forDate date: Date, forCellState state: CellState) {
+        monthLabel.isHidden = true
+
+        if let day = Calendar.current.ordinality(of: .day, in: .month, for: date), day == 1 {
+            monthLabel.text = monthLabelFormatter.string(from: date)
+            monthLabel.isHidden = state.dateBelongsTo != .thisMonth
+        }
     }
 }

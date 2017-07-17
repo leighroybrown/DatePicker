@@ -28,8 +28,8 @@
                                 <color key="textColor" red="1" green="0.89852119060000002" blue="0.15082320499999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="qHw-s3-7QB" customClass="JTAppleCalendarView" customModule="jt_calender_test" customModuleProvider="target">
-                                <rect key="frame" x="10" y="76" width="355" height="300"/>
+                            <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="qHw-s3-7QB" customClass="JTAppleCalendarView" customModule="jt_calender_test" customModuleProvider="target">
+                                <rect key="frame" x="10" y="101" width="355" height="300"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="300" id="N0q-wM-g8b"/>
@@ -41,13 +41,19 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CalendarCell" id="FWK-6s-pAe" customClass="CalendarCell" customModule="jt_calender_test" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CalendarCell" id="FWK-6s-pAe" customClass="CalendarCell" customModule="jt_calender_test" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="esN-ap-hKF" userLabel="Month label">
+                                                    <rect key="frame" x="4" y="-21" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                                 <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9ef-ES-XYu" userLabel="Border">
                                                     <rect key="frame" x="0.0" y="18.5" width="1" height="13"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -84,10 +90,12 @@
                                             <constraint firstAttribute="bottom" secondItem="XHy-KD-L4i" secondAttribute="bottom" constant="5" id="1A4-uZ-yJb"/>
                                             <constraint firstItem="2xX-bS-ng2" firstAttribute="leading" secondItem="FWK-6s-pAe" secondAttribute="leading" id="3iI-e6-V4O"/>
                                             <constraint firstItem="9ef-ES-XYu" firstAttribute="centerY" secondItem="FWK-6s-pAe" secondAttribute="centerY" id="4SG-yF-vGn"/>
+                                            <constraint firstItem="esN-ap-hKF" firstAttribute="centerX" secondItem="FWK-6s-pAe" secondAttribute="centerX" id="B0m-Yt-wSC"/>
                                             <constraint firstAttribute="trailing" secondItem="XHy-KD-L4i" secondAttribute="trailing" constant="5" id="BT9-8x-scP"/>
                                             <constraint firstItem="2xX-bS-ng2" firstAttribute="top" secondItem="FWK-6s-pAe" secondAttribute="top" id="EjY-ci-d3B"/>
                                             <constraint firstAttribute="trailing" secondItem="fsc-84-P57" secondAttribute="trailing" constant="-1" id="NxH-nT-8d4"/>
                                             <constraint firstItem="1k8-bn-N56" firstAttribute="centerY" secondItem="FWK-6s-pAe" secondAttribute="centerY" id="OEd-qJ-p9k"/>
+                                            <constraint firstAttribute="top" secondItem="esN-ap-hKF" secondAttribute="bottom" id="XB6-J0-3UH"/>
                                             <constraint firstAttribute="bottom" secondItem="2xX-bS-ng2" secondAttribute="bottom" id="Y5P-82-q77"/>
                                             <constraint firstItem="XHy-KD-L4i" firstAttribute="leading" secondItem="FWK-6s-pAe" secondAttribute="leading" constant="5" id="a2M-88-nuU"/>
                                             <constraint firstItem="fsc-84-P57" firstAttribute="leading" secondItem="FWK-6s-pAe" secondAttribute="leading" id="bnb-2I-An0"/>
@@ -102,6 +110,7 @@
                                             <outlet property="borderView" destination="9ef-ES-XYu" id="37Z-Gm-QIY"/>
                                             <outlet property="inRangeView" destination="fsc-84-P57" id="rDI-8T-eJZ"/>
                                             <outlet property="label" destination="1k8-bn-N56" id="y17-qo-5e2"/>
+                                            <outlet property="monthLabel" destination="esN-ap-hKF" id="FKW-zZ-Mm2"/>
                                             <outlet property="selectedView" destination="2xX-bS-ng2" id="Yh7-1A-rA3"/>
                                             <outlet property="todaysView" destination="XHy-KD-L4i" id="NUC-4E-2Hw"/>
                                         </connections>
@@ -205,7 +214,7 @@
                             <constraint firstItem="CuM-Ms-6N8" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="5" id="b3e-Eu-eri"/>
                             <constraint firstItem="eJB-Fs-c4V" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="dTB-4M-aJP"/>
                             <constraint firstItem="CuM-Ms-6N8" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="20" id="dXx-Jq-3Ga"/>
-                            <constraint firstItem="qHw-s3-7QB" firstAttribute="top" secondItem="eJB-Fs-c4V" secondAttribute="bottom" constant="5" id="icf-XS-xUo"/>
+                            <constraint firstItem="qHw-s3-7QB" firstAttribute="top" secondItem="eJB-Fs-c4V" secondAttribute="bottom" constant="30" id="icf-XS-xUo"/>
                             <constraint firstAttribute="trailing" secondItem="eJB-Fs-c4V" secondAttribute="trailing" constant="10" id="wDO-hM-3NW"/>
                         </constraints>
                     </view>

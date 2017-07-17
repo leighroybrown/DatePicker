@@ -10,6 +10,7 @@
 		B9037CF71F191685007F5B13 /* DatePickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9037CF61F191685007F5B13 /* DatePickerButton.swift */; };
 		B98B9C4F1F1CBB5A00AD5A8E /* JTAppleCalendarView+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98B9C4E1F1CBB5A00AD5A8E /* JTAppleCalendarView+Animation.swift */; };
 		B98B9C511F1CCEEF00AD5A8E /* NSLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98B9C501F1CCEEF00AD5A8E /* NSLayoutConstraint.swift */; };
+		B98B9C531F1CEBA800AD5A8E /* CalendarHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98B9C521F1CEBA800AD5A8E /* CalendarHeaderView.swift */; };
 		B9C9B4801F176E760045D71C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C9B47F1F176E760045D71C /* AppDelegate.swift */; };
 		B9C9B4821F176E760045D71C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C9B4811F176E760045D71C /* ViewController.swift */; };
 		B9C9B4851F176E760045D71C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9C9B4831F176E760045D71C /* Main.storyboard */; };
@@ -38,6 +39,7 @@
 		B9037CF61F191685007F5B13 /* DatePickerButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerButton.swift; sourceTree = "<group>"; };
 		B98B9C4E1F1CBB5A00AD5A8E /* JTAppleCalendarView+Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "JTAppleCalendarView+Animation.swift"; sourceTree = "<group>"; };
 		B98B9C501F1CCEEF00AD5A8E /* NSLayoutConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSLayoutConstraint.swift; sourceTree = "<group>"; };
+		B98B9C521F1CEBA800AD5A8E /* CalendarHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarHeaderView.swift; sourceTree = "<group>"; };
 		B9C9B47C1F176E760045D71C /* jt-calender-test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "jt-calender-test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9C9B47F1F176E760045D71C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B9C9B4811F176E760045D71C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				B9037CF61F191685007F5B13 /* DatePickerButton.swift */,
 				B98B9C4E1F1CBB5A00AD5A8E /* JTAppleCalendarView+Animation.swift */,
 				B98B9C501F1CCEEF00AD5A8E /* NSLayoutConstraint.swift */,
+				B98B9C521F1CEBA800AD5A8E /* CalendarHeaderView.swift */,
 			);
 			path = "jt-calender-test";
 			sourceTree = "<group>";
@@ -225,6 +228,7 @@
 				B98B9C4F1F1CBB5A00AD5A8E /* JTAppleCalendarView+Animation.swift in Sources */,
 				B9C9B4B11F176EDE0045D71C /* UIScrollViewDelegates.swift in Sources */,
 				B9C9B4801F176E760045D71C /* AppDelegate.swift in Sources */,
+				B98B9C531F1CEBA800AD5A8E /* CalendarHeaderView.swift in Sources */,
 				B9C9B4AC1F176EDE0045D71C /* JTAppleCalendarView.swift in Sources */,
 				B9C9B4A51F176EDE0045D71C /* GlobalFunctionsAndExtensions.swift in Sources */,
 				B9C9B4A81F176EDE0045D71C /* JTAppleCalendarDelegateProtocol.swift in Sources */,
