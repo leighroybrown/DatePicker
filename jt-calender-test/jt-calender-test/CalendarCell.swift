@@ -50,7 +50,6 @@ class CalendarCell: JTAppleCell {
     ///   - toDate: the optional toDate to set to selected
     ///   - cellDate: the date of the cell to update
     func setup(forState state: CellState, fromDate: Date?, toDate: Date?, cellDate: Date) {
-        updateLabels(forDate: cellDate, forCellState: state)
         inRangeView.isHidden = true
 
         // Show/Hide the today indicator
@@ -65,6 +64,9 @@ class CalendarCell: JTAppleCell {
 
         // Handle selected
         setupSelectedState(forCellDate: cellDate, fromDate: fromDate, toDate: toDate)
+
+        // Handle copy
+        updateLabels(forDate: cellDate, forCellState: state)
 
         // Handle text colour
         switch (selectedView.isHidden, state.dateBelongsTo) {
@@ -136,6 +138,8 @@ class CalendarCell: JTAppleCell {
             switch state.dateBelongsTo {
             case .thisMonth:
                 monthLabel.isHidden = false
+            case .followingMonthWithinBoundary where !selectedView.isHidden:
+                label.text = state.text
             case .followingMonthWithinBoundary:
                 label.text = text
             default:
