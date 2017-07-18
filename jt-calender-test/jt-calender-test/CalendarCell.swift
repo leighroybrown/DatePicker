@@ -52,13 +52,6 @@ class CalendarCell: JTAppleCell {
     func setup(forState state: CellState, fromDate: Date?, toDate: Date?, cellDate: Date) {
         inRangeView.isHidden = true
 
-        // Show/Hide the today indicator
-        if Calendar.current.isDateInToday(cellDate) && !isSelected {
-            todaysView.isHidden = false
-        } else {
-            todaysView.isHidden = true
-        }
-
         // Show/Hide the left border depending on day of week
         borderView.isHidden = state.day == .monday
 
@@ -67,6 +60,13 @@ class CalendarCell: JTAppleCell {
 
         // Handle copy
         updateLabels(forDate: cellDate, forCellState: state)
+
+        // Show/Hide the today indicator
+        if Calendar.current.isDateInToday(cellDate) && selectedView.isHidden {
+            todaysView.isHidden = false
+        } else {
+            todaysView.isHidden = true
+        }
 
         // Handle text colour
         switch (selectedView.isHidden, state.dateBelongsTo) {
