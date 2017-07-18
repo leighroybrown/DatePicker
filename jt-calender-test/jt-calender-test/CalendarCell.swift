@@ -101,13 +101,28 @@ class CalendarCell: JTAppleCell {
     /// Animates fading in the inRangeView
     ///
     /// - Parameter delay: the delay before starting the animation
-    func animateInRangeView(withDelay delay: TimeInterval) {
+    fileprivate func animateInRangeView(withDelay delay: TimeInterval) {
         inRangeView.alpha = 0
         inRangeView.isHidden = false
 
         UIView.animate(withDuration: 1.0, delay: delay, animations: {
             self.inRangeView.alpha = 1
         })
+    }
+
+    /// Show the in range view for the cell
+    ///
+    /// - Parameters:
+    ///   - animated: whether to animate the view in
+    ///   - delay: the delay before starting the animation
+    func showInRangeView(animated: Bool, delay: TimeInterval) {
+        inRangeView.isHidden = false
+
+        if animated {
+            animateInRangeView(withDelay: delay)
+        } else {
+            inRangeView.alpha    = 1
+        }
     }
 
     fileprivate func updateLabels(forDate date: Date, forCellState state: CellState) {

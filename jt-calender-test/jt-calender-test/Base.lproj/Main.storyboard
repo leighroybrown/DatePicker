@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -69,7 +69,7 @@
                                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
                                                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fsc-84-P57" userLabel="In Range View">
-                                                    <rect key="frame" x="0.0" y="5" width="51" height="40"/>
+                                                    <rect key="frame" x="0.0" y="5" width="50" height="40"/>
                                                     <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="31" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1k8-bn-N56">
@@ -87,7 +87,7 @@
                                             <constraint firstItem="esN-ap-hKF" firstAttribute="centerX" secondItem="FWK-6s-pAe" secondAttribute="centerX" id="B0m-Yt-wSC"/>
                                             <constraint firstAttribute="trailing" secondItem="XHy-KD-L4i" secondAttribute="trailing" constant="5" id="BT9-8x-scP"/>
                                             <constraint firstItem="2xX-bS-ng2" firstAttribute="top" secondItem="FWK-6s-pAe" secondAttribute="top" id="EjY-ci-d3B"/>
-                                            <constraint firstAttribute="trailing" secondItem="fsc-84-P57" secondAttribute="trailing" constant="-1" id="NxH-nT-8d4"/>
+                                            <constraint firstAttribute="trailing" secondItem="fsc-84-P57" secondAttribute="trailing" id="NxH-nT-8d4"/>
                                             <constraint firstItem="1k8-bn-N56" firstAttribute="centerY" secondItem="FWK-6s-pAe" secondAttribute="centerY" id="OEd-qJ-p9k"/>
                                             <constraint firstAttribute="top" secondItem="esN-ap-hKF" secondAttribute="bottom" constant="2" id="XB6-J0-3UH"/>
                                             <constraint firstAttribute="bottom" secondItem="2xX-bS-ng2" secondAttribute="bottom" id="Y5P-82-q77"/>

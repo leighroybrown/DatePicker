@@ -11,12 +11,13 @@ import UIKit
 
 extension JTAppleCalendarView {
 
-    /// Animates the cells in the calendar view between 2 dates
+    /// Select range of cells between 2 dates
     ///
     /// - Parameters:
-    ///   - fromDate: starting date of the cell to animate to
-    ///   - toDate: the ending date of the cell to animate to
-    func animateCells(fromDate: Date?, toDate: Date?) {
+    ///   - fromDate: the starting date of the range
+    ///   - toDate: the end date of the range
+    ///   - animated: whether to animate the selected view in
+    func rangeSelectCells(between fromDate: Date?, toDate: Date?, animated: Bool) {
         guard let fromDate = fromDate, let toDate = toDate else {
             return
         }
@@ -44,7 +45,7 @@ extension JTAppleCalendarView {
             let path = IndexPath(row: row, section: section)
 
             if let cell = cellForItem(at: path) as? CalendarCell {
-                cell.animateInRangeView(withDelay: delay * count)
+                cell.showInRangeView(animated: animated, delay: delay * count)
             }
 
             count += 1

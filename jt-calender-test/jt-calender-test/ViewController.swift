@@ -65,6 +65,7 @@ extension ViewController: JTAppleCalendarViewDelegate {
     func calendar(_ calendar: JTAppleCalendarView, cellForItemAt date: Date, cellState: CellState, indexPath: IndexPath) -> JTAppleCell {
         let cell = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: "CalendarCell", for: indexPath) as! CalendarCell
 
+        calendar.rangeSelectCells(between: fromDate, toDate: toDate, animated: false)
         cell.setup(forState: cellState, fromDate: fromDate, toDate: toDate, cellDate: date)
         return cell
     }
@@ -82,7 +83,7 @@ extension ViewController: JTAppleCalendarViewDelegate {
             toButton.updateTitle(forDate: date)
         }
 
-        calendar.animateCells(fromDate: fromDate, toDate: toDate)
+        calendar.rangeSelectCells(between: fromDate, toDate: toDate, animated: true)
         cell.setup(forState: cellState, fromDate: fromDate, toDate: toDate, cellDate: date)
     }
 
