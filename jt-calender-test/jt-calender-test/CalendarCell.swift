@@ -45,24 +45,24 @@ class CalendarCell: JTAppleCell {
     /// Setup the UI for the calendar cell
     ///
     /// - Parameters:
-    ///   - state: the CellState used to get the text
+    ///   - state: the CellState used to get the text and date
     ///   - fromDate: the optional fromDate to set to selected
     ///   - toDate: the optional toDate to set to selected
-    ///   - cellDate: the date of the cell to update
-    func setup(forState state: CellState, fromDate: Date?, toDate: Date?, cellDate: Date) {
+    func setup(forState state: CellState, fromDate: Date?, toDate: Date?) {
+        let date             = state.date
         inRangeView.isHidden = true
 
         // Show/Hide the left border depending on day of week
         borderView.isHidden = state.day == .monday
 
         // Handle selected
-        setupSelectedState(forCellDate: cellDate, fromDate: fromDate, toDate: toDate)
+        setupSelectedState(forCellDate: date, fromDate: fromDate, toDate: toDate)
 
         // Handle copy
-        updateLabels(forDate: cellDate, forCellState: state)
+        updateLabels(forCellState: state)
 
         // Show/Hide the today indicator
-        if Calendar.current.isDateInToday(cellDate) && selectedView.isHidden {
+        if Calendar.current.isDateInToday(date) && selectedView.isHidden {
             todaysView.isHidden = false
         } else {
             todaysView.isHidden = true
@@ -72,9 +72,9 @@ class CalendarCell: JTAppleCell {
         switch (selectedView.isHidden, state.dateBelongsTo) {
         case (false, _):
             label.textColor = CellColours.Selected
-        case (true, .thisMonth) where Calendar.current.isDateInToday(cellDate):
+        case (true, .thisMonth) where Calendar.current.isDateInToday(date):
             label.textColor = CellColours.Default
-        case (true, .thisMonth) where cellDate < Date():
+        case (true, .thisMonth) where date < Date():
             label.textColor = CellColours.OutOfMonth
         case (true, .thisMonth):
             label.textColor = CellColours.Default
@@ -127,7 +127,8 @@ class CalendarCell: JTAppleCell {
         }
     }
 
-    fileprivate func updateLabels(forDate date: Date, forCellState state: CellState) {
+    fileprivate func updateLabels(forCellState state: CellState) {
+        let date            = state.date
         label.text          = state.text
         monthLabel.isHidden = true
 

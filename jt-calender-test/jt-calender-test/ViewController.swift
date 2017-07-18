@@ -66,7 +66,7 @@ extension ViewController: JTAppleCalendarViewDelegate {
         let cell = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: "CalendarCell", for: indexPath) as! CalendarCell
 
         calendar.rangeSelectCells(between: fromDate, toDate: toDate, animated: false)
-        cell.setup(forState: cellState, fromDate: fromDate, toDate: toDate, cellDate: date)
+        cell.setup(forState: cellState, fromDate: fromDate, toDate: toDate)
         return cell
     }
 
@@ -84,7 +84,7 @@ extension ViewController: JTAppleCalendarViewDelegate {
         }
 
         calendar.rangeSelectCells(between: fromDate, toDate: toDate, animated: true)
-        cell.setup(forState: cellState, fromDate: fromDate, toDate: toDate, cellDate: date)
+        cell.setup(forState: cellState, fromDate: fromDate, toDate: toDate)
     }
 
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
@@ -97,7 +97,7 @@ extension ViewController: JTAppleCalendarViewDelegate {
             return
         }
 
-        cell.setup(forState: cellState, fromDate: fromDate, toDate: toDate, cellDate: date)
+        cell.setup(forState: cellState, fromDate: fromDate, toDate: toDate)
     }
 
     func calendar(_ calendar: JTAppleCalendarView, shouldSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) -> Bool {
