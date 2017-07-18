@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="qHw-s3-7QB" customClass="JTAppleCalendarView" customModule="jt_calender_test" customModuleProvider="target">
-                                <rect key="frame" x="10" y="125.5" width="355" height="300"/>
+                                <rect key="frame" x="12.5" y="125.5" width="350" height="300"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="300" id="N0q-wM-g8b"/>
@@ -100,6 +100,7 @@
                                             <constraint firstAttribute="bottom" secondItem="fsc-84-P57" secondAttribute="bottom" constant="5" id="pgl-OX-Snm"/>
                                             <constraint firstItem="fsc-84-P57" firstAttribute="top" secondItem="FWK-6s-pAe" secondAttribute="top" constant="5" id="umf-8J-sQi"/>
                                         </constraints>
+                                        <size key="customSize" width="50" height="50"/>
                                         <connections>
                                             <outlet property="borderView" destination="9ef-ES-XYu" id="37Z-Gm-QIY"/>
                                             <outlet property="inRangeView" destination="fsc-84-P57" id="rDI-8T-eJZ"/>
@@ -198,9 +199,9 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="gGa-0A-EhS" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="50" id="1jM-dO-Mfm"/>
-                            <constraint firstAttribute="trailing" secondItem="qHw-s3-7QB" secondAttribute="trailing" constant="10" id="2IW-Go-0Wh"/>
+                            <constraint firstAttribute="trailing" secondItem="qHw-s3-7QB" secondAttribute="trailing" constant="12.5" id="2IW-Go-0Wh"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Yrg-4o-O32" secondAttribute="trailing" constant="50" id="C4Y-eh-fGl"/>
-                            <constraint firstItem="qHw-s3-7QB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="PdZ-v1-4hq"/>
+                            <constraint firstItem="qHw-s3-7QB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="12.5" id="PdZ-v1-4hq"/>
                             <constraint firstItem="eJB-Fs-c4V" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="dTB-4M-aJP"/>
                             <constraint firstItem="qHw-s3-7QB" firstAttribute="top" secondItem="eJB-Fs-c4V" secondAttribute="bottom" constant="30" id="icf-XS-xUo"/>
                             <constraint firstItem="gGa-0A-EhS" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="15" id="tLf-VN-WHM"/>
