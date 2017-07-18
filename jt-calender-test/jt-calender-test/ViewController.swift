@@ -40,13 +40,21 @@ class ViewController: UIViewController {
         }
     }
 
+    /// The index path of the fromDate
+    fileprivate var fromDateIndexPath: IndexPath?
+
+    /// The index path of the toDate
+    fileprivate var toDateIndexPath: IndexPath?
+
     @IBAction func fromButtonTapped(_ sender: Any) {
-        fromDate = nil
+        fromDate          = nil
+        fromDateIndexPath = nil
         calendarView.reloadData()
     }
 
     @IBAction func toButtonTapped(_ sender: Any) {
-        toDate = nil
+        toDate          = nil
+        toDateIndexPath = nil
         calendarView.reloadData()
     }
 }
@@ -65,7 +73,7 @@ extension ViewController: JTAppleCalendarViewDelegate {
     func calendar(_ calendar: JTAppleCalendarView, cellForItemAt date: Date, cellState: CellState, indexPath: IndexPath) -> JTAppleCell {
         let cell = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: "CalendarCell", for: indexPath) as! CalendarCell
 
-        calendar.rangeSelectCells(between: fromDate, toDate: toDate, animated: false)
+        calendar.rangeSelectCells(fromDatePath: fromDateIndexPath, toDatePath: toDateIndexPath, animated: false)
         cell.setup(forState: cellState, fromDate: fromDate, toDate: toDate)
         return cell
     }
@@ -76,14 +84,16 @@ extension ViewController: JTAppleCalendarViewDelegate {
         }
 
         if fromDate == nil {
-            fromDate = date
+            fromDate          = date
+            fromDateIndexPath = calendar.indexPath(for: cell)
             fromButton.updateTitle(forDate: date)
         } else if toDate == nil {
-            toDate = date
+            toDate          = date
+            toDateIndexPath = calendar.indexPath(for: cell)
             toButton.updateTitle(forDate: date)
         }
 
-        calendar.rangeSelectCells(between: fromDate, toDate: toDate, animated: true)
+        calendar.rangeSelectCells(fromDatePath: fromDateIndexPath, toDatePath: toDateIndexPath, animated: true)
         cell.setup(forState: cellState, fromDate: fromDate, toDate: toDate)
     }
 
@@ -103,8 +113,10 @@ extension ViewController: JTAppleCalendarViewDelegate {
     func calendar(_ calendar: JTAppleCalendarView, shouldSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) -> Bool {
         switch (fromDate, toDate) {
         case (.some, .some):
-            fromDate = nil
-            toDate   = nil
+            fromDate          = nil
+            fromDateIndexPath = nil
+            toDate            = nil
+            toDateIndexPath   = nil
             calendar.reloadData()
             return Calendar.current.isDateInToday(date) ? true : date > Date()
         case (.some(let fromDate), nil) where date < fromDate:

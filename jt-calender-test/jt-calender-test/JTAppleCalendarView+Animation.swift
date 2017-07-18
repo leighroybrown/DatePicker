@@ -14,30 +14,28 @@ extension JTAppleCalendarView {
     /// Select range of cells between 2 dates
     ///
     /// - Parameters:
-    ///   - fromDate: the starting date of the range
-    ///   - toDate: the end date of the range
+    ///   - fromDatePath: the index path of the starting date of the range
+    ///   - toDatePath: the index path of the end date of the range
     ///   - animated: whether to animate the selected view in
-    func rangeSelectCells(between fromDate: Date?, toDate: Date?, animated: Bool) {
-        guard let fromDate = fromDate, let toDate = toDate else {
+    func rangeSelectCells(fromDatePath: IndexPath?, toDatePath: IndexPath?, animated: Bool) {
+        guard let fromPath = fromDatePath, let toPath = toDatePath else {
             return
         }
 
-        /// Dont animate if the dates are not in the same month
-        if !Calendar.current.isDate(fromDate, equalTo: toDate, toGranularity: .month) {
+        // Check if they're the same month
+        if fromPath.section != toPath.section {
             return
         }
 
-        let indexPaths  = pathsFromDates([fromDate, toDate])
-        let startNumber = indexPaths[0].row + 1
-        let endNumber   = indexPaths[1].row - 1
-        let section     = indexPaths[0].section
+        let startNumber = fromPath.row + 1
+        let endNumber   = toPath.row - 1
+        let section     = fromPath.section
 
         /// Dont animate if they're right next to each other
         if startNumber > endNumber {
             return
         }
 
-        /// Animate
         let delay: TimeInterval = 0.03
         var count: Double       = 1
 
@@ -47,7 +45,6 @@ extension JTAppleCalendarView {
             if let cell = cellForItem(at: path) as? CalendarCell {
                 cell.showInRangeView(animated: animated, delay: delay * count)
             }
-
             count += 1
         }
     }
