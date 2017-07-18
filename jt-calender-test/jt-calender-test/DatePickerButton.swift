@@ -17,7 +17,7 @@ class DatePickerButton: UIButton {
 
     fileprivate lazy var formatter: DateFormatter = {
         let formatter        = DateFormatter()
-        formatter.dateFormat = "MM dd"
+        formatter.dateFormat = "d MMM"
         formatter.locale     = Calendar.current.locale
         return formatter
     }()
